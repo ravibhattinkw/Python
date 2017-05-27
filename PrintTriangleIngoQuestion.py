@@ -7,7 +7,7 @@ def printTriangle(n):
    i = 0
    while (i < n):
       j = 0
-      while (j < epos):
+      while (j <= epos):
           if (j >= spos):
              print 'x' + ' ',
           else:
