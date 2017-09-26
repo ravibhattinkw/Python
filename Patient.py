@@ -38,8 +38,10 @@ def calculate_age(birthdate):
      return age
     
 def displayPatientDetails(TelNum):
-     for p in PatientList:
+    exists = 0
+    for p in PatientList:
          if(p.telnum == TelNum):
+            exists = 1
             print ("Name :", p.firstname, p.lastname)
             print ("profession :", p.profession)
             print ("Disease :", p.disease)
@@ -51,6 +53,9 @@ def displayPatientDetails(TelNum):
                 print ("Patient deceased")
             else:
                 print ("Patient Alive")
+         
+    if(exists == 0):
+        print ("Patient Doesnt Exist")
             
 
 if __name__ == "__main__":
@@ -64,4 +69,6 @@ if __name__ == "__main__":
   count = patient.getMaxPatientCount()
   print ("Num of Patients=",count)
   
-  displayPatientDetails("1235")
+  displayPatientDetails("1234")
+ 
+  displayPatientDetails("1236")
