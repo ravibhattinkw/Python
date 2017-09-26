@@ -10,8 +10,6 @@ Created on Tue Sep 26 09:06:57 2017
 import time
 import datetime
 
-patientId = 1
-
 class Patient:
  "Base Patient Record Class"
  
@@ -24,11 +22,31 @@ class Patient:
     self.disease = Disease
     self.deceased = Deceased
     self.birthdate = Birthdate
-    self.patientId = patientId
-    self.patientId += 1
+    self.generatePatientId()   
 
+ def generatePatientId(self):
+     self.patientId = self.telnum
+     
  def getMaxPatientCount(self):
-    return self.patientId
+    count = 0
+    for p in PatientList:
+        count += 1
+    return count
+
+ def DisplayPatientDetails(self):
+    for p in PatientList:
+        print ("Name :", p.firstname, p.lastname)
+        print ("profession :", p.profession)
+        print ("Disease :", p.disease)
+        print ("PatientId :", p.patientId)
+            
+        age = calculate_age(p.birthdate)
+        print ("Age =",age)
+            
+        if (p.deceased == 1):
+            print ("Patient deceased")
+        else:
+            print ("Patient Alive")     
  
 def calculate_age(birthdate):
      birthyear = birthdate.split(',')
@@ -37,7 +55,7 @@ def calculate_age(birthdate):
      age = currentyear.year - int(birthyear[0])
      return age
     
-def displayPatientDetails(TelNum):
+def SearchPatientDetails(TelNum):
     exists = 0
     for p in PatientList:
          if(p.telnum == TelNum):
@@ -45,7 +63,8 @@ def displayPatientDetails(TelNum):
             print ("Name :", p.firstname, p.lastname)
             print ("profession :", p.profession)
             print ("Disease :", p.disease)
-          
+            print ("PatientId :", p.patientId)
+            
             age = calculate_age(p.birthdate)
             print ("Age =",age)
             
@@ -62,13 +81,12 @@ if __name__ == "__main__":
   PatientList = []
   patient = Patient("Raj","kundra","PA","1234","Fever","0","1975,7,23")
   PatientList.append(patient)
-
   patient1 = Patient("Ravi","Ram","CEO","1235","cold","0","1984,3,12")
   PatientList.append(patient1)
   print (PatientList)
   count = patient.getMaxPatientCount()
   print ("Num of Patients=",count)
   
-  displayPatientDetails("1234")
+  patient.DisplayPatientDetails()
  
-  displayPatientDetails("1236")
+  SearchPatientDetails("1234")
