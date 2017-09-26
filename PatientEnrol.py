@@ -9,6 +9,8 @@ Created on Tue Sep 26 09:06:57 2017
 
 import time
 import datetime
+import Doctor
+#from Doctor import *
 
 class Patient:
  "Base Patient Record Class"
@@ -22,7 +24,8 @@ class Patient:
     self.disease = Disease
     self.deceased = Deceased
     self.birthdate = Birthdate
-    self.generatePatientId()   
+    self.generatePatientId() 
+    self.DocId = 0
 
  def generatePatientId(self):
      self.patientId = self.telnum
@@ -47,7 +50,31 @@ class Patient:
             print ("Patient deceased")
         else:
             print ("Patient Alive")     
- 
+
+def AssignPatientToDoctor(TelNum):
+    #Assign based on the disease.
+    exists = 0
+    for p in PatientList:
+         if(p.telnum == TelNum):
+            exists = 1           
+            if (p.disease == "Fever"):
+                print ("Assign Physician")
+                for d in DoctorList:
+                    if(d.specilization == "Physician"):
+                        p.DocId = d.DoctorId
+                    else:
+                        print("Keep looking")
+            elif(p.disease == "Heart"):
+                print ("Assign Cardio")
+            elif(p.disease == "Brain"):
+                print ("Assign Nuero")
+            else:
+                print ("Cannot determine")      
+    
+    if(exists == 0):
+        print ("Patient Doesnt Exist")
+    
+    
 def calculate_age(birthdate):
      birthyear = birthdate.split(',')
      currentyear = datetime.datetime.today().date()
@@ -64,6 +91,7 @@ def SearchPatientDetails(TelNum):
             print ("profession :", p.profession)
             print ("Disease :", p.disease)
             print ("PatientId :", p.patientId)
+            print ("Assigned Doc:",p.DocId)
             
             age = calculate_age(p.birthdate)
             print ("Age =",age)
@@ -88,5 +116,9 @@ if __name__ == "__main__":
   print ("Num of Patients=",count)
   
   patient.DisplayPatientDetails()
- 
+  
+  AssignPatientToDoctor("1234")
+  
+  print("After Assigning Doc")
   SearchPatientDetails("1234")
+  SearchPatientDetails("1236")
