@@ -103,7 +103,17 @@ def SearchPatientDetails(TelNum):
          
     if(exists == 0):
         print ("Patient Doesnt Exist")
-            
+ 
+def DeletePatientDetails(TelNum):
+    exists = 0
+    for p in PatientList:
+         if(p.telnum == TelNum):
+            exists = 1
+            print ("deleting Patient :", p.firstname, p.lastname , "information")
+            PatientList.remove(p)
+         
+    if(exists == 0):
+        print ("Patient Doesnt Exist")           
 
 if __name__ == "__main__":
   PatientList = []
@@ -121,4 +131,13 @@ if __name__ == "__main__":
   
   print("After Assigning Doc")
   SearchPatientDetails("1234")
+  
+  print("\nSearch for non-existent patient")
   SearchPatientDetails("1236")
+  
+  print ("\nDelete Patient Record")
+  DeletePatientDetails("1234")
+  
+  count = patient.getMaxPatientCount()
+  print ("\nNum of Patients=",count)
+  patient.DisplayPatientDetails()
