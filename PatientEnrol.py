@@ -66,10 +66,23 @@ def AssignPatientToDoctor(TelNum):
                         print("Keep looking")
             elif(p.disease == "Heart"):
                 print ("Assign Cardio")
+                for d in DoctorList:
+                    if(d.specilization == "Cardio"):
+                        p.DocId = d.DoctorId
+                    else:
+                        print("Keep looking")
             elif(p.disease == "Brain"):
                 print ("Assign Nuero")
+                for d in DoctorList:
+                    if(d.specilization == "Nuero"):
+                        p.DocId = d.DoctorId
+                    else:
+                        print("Keep looking")
             else:
-                print ("Cannot determine")      
+                print ("Cannot determine Doctor assign General physician")
+                for d in DoctorList:
+                    if(d.specilization == "Physician"):
+                        p.DocId = d.DoctorId
     
     if(exists == 0):
         print ("Patient Doesnt Exist")
